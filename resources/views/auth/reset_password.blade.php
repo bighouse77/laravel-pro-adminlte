@@ -10,7 +10,8 @@
 
         <div class="card">
             <div class="card-body register-card-body">
-                <p class="register-box-msg">Register a new membership</p>
+                <p class="register-box-msg">Reset password</p>
+
                 <form action="{{ route('password.update') }}" method="post">
                     @csrf
 
