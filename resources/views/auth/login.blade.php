@@ -22,7 +22,7 @@
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-text"><span class="bi bi-lock-fill"></span></div>
-                    <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password" value="{{ old('password') }} />
+                    <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password" value="{{ old('password') }}" />
                     @error('password')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
