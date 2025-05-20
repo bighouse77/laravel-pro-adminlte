@@ -1,15 +1,22 @@
 @extends('layouts.default')
-@section('page-title', 'Adicionar usuário')
+@section('page-title', 'Editar usuário')
 
 @section('content')
-    <form action="{{ route('users.store') }}" method="POST">
+    @session('success')
+    <div class="alert alert-success">
+        {{ $value }}
+    </div>
+    @endsession
+
+    <form action="{{ route('users.update', $user->id) }}" method="POST">
         @csrf
+        @method('PUT')
         <div class="mb-3">
             <label for="name" class="form-label">Nome</label>
             <input
                 type="text"
                 name="name"
-                value="{{ old('name') }}"
+                value="{{ old('name') ?? $user->name }}"
                 class="form-control @error('name') is-invalid @enderror"
                 id="name"
             >
@@ -24,7 +31,7 @@
             <input
                 type="email"
                 name="email"
-                value="{{ old('email') }}"
+                value="{{ old('email') ?? $user->email}}"
                 class="form-control @error('email') is-invalid @enderror"
                 id="email">
             @error('email')
@@ -40,7 +47,12 @@
                 name="password"
                 class="form-control @error('password') is-invalid @enderror"
                 id="password">
+            @error('password')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+            @enderror
         </div>
-        <button type="submit" class="btn btn-primary">Adicionar</button>
+        <button type="submit" class="btn btn-primary">Atualizar</button>
     </form>
 @endsection

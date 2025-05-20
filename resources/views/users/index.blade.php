@@ -2,10 +2,16 @@
 @section('page-title', 'Usuários')
 
 @section('page-actions')
-    <a href="" class="btn btn-primary">Adicionar</a>
+    <a href="{{ route('users.create') }}" class="btn btn-primary">Adicionar</a>
 @endsection
 
 @section('content')
+    @session('success')
+    <div class="alert alert-success">
+        {{ $value }}
+    </div>
+    @endsession
+
     <table class="table">
         <thead>
         <tr>
@@ -22,8 +28,12 @@
                 <td>{{ $user->name }}</td>
                 <td>{{ $user->email }}</td>
                 <td>
-                    <a href="" class="btn btn-primary btn-sm">Editar</a>
-                    <a href="" class="btn btn-danger btn-sm">Excluir</a>
+                    <a href="{{ route('users.edit', $user) }}" class="btn btn-primary btn-sm">Editar</a>
+                    <form action="{{ route('users.delete', $user) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
+                    </form>
                 </td>
             </tr>
         @endforeach
